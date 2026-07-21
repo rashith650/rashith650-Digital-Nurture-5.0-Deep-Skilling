@@ -1,7 +1,0 @@
-export default function LoadingSpinner() {
-  return (
-    <div className="loader">
-      Loading Courses...
-    </div>
-  );
-}
