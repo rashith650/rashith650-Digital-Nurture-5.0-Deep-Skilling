@@ -1,0 +1,39 @@
+<div class="course-list-container">
+  <div class="list-header">
+    <h2 class="title">Enrolled Courses</h2>
+    <div class="search-wrapper">
+      <span class="search-icon">🔍</span>
+      <input 
+        type="text" 
+        [(ngModel)]="searchTerm" 
+        placeholder="Search courses by title..." 
+        class="search-input"
+      />
+    </div>
+  </div>
+
+  <!-- Loading Spinner -->
+  <div *ngIf="loading" class="spinner-container">
+    <div class="spinner"></div>
+    <p class="loading-text">Fetching your academic record...</p>
+  </div>
+
+  <!-- Course Grid -->
+  <div *ngIf="!loading" class="course-grid">
+    <div *ngFor="let course of filteredCourses; trackBy: trackByCourseCode" class="grid-item">
+      <app-course-card
+        [name]="course.name"
+        [code]="course.code"
+        [credits]="course.credits"
+        [grade]="course.grade"
+      ></app-course-card>
+    </div>
+  </div>
+
+  <!-- No courses found -->
+  <div *ngIf="!loading && filteredCourses.length === 0" class="no-results">
+    <div class="no-results-icon">📭</div>
+    <h3>No courses found</h3>
+    <p class="no-results-subtitle">We couldn't find any courses matching "{{ searchTerm }}".</p>
+  </div>
+</div>
